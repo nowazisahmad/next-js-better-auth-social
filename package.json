@@ -9,11 +9,17 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@better-auth/mongo-adapter": "^1.7.6",
+    "@heroui/react": "^3.2.6",
+    "@heroui/styles": "^3.2.6",
+    "better-auth": "^1.7.6",
+    "mongodb": "^6.8.2",
     "next": "16.3.6",
     "react": "19.2.8",
     "react-dom": "19.2.8"
   },
   "devDependencies": {
+    "@gravity-ui/icons": "^2.22.0",
     "@tailwindcss/postcss": "^4",
     "babel-plugin-react-compiler": "1.0.0",
     "eslint": "^9",
