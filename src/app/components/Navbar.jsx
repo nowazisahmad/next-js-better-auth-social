@@ -2,12 +2,11 @@
 import { useState } from "react";
 import { Link, Button, Spinner } from "@heroui/react";
 import { signOut, useSession } from "@/lib/auth-client";
-import { PathnameContext } from "next/dist/shared/lib/hooks-client-context.shared-runtime";
 import { usePathname } from "next/navigation";
 
 export default function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+    const pathname = usePathname();
     const { data: session, isPending } = useSession();
 
     console.log('user session in Navbar', session)
@@ -23,21 +22,32 @@ export default function Navbar() {
       <li>
         <Link
           href="/"
-          className={usePathname === "/" ? "text-blue-500" : ""}
+          className={pathname === "/" ? "text-blue-500" : ""}
           aria-current="page"
         >
           Home
         </Link>
       </li>
       <li>
-        <Link href="/">Features</Link>
+        <Link 
+        href="/features"
+        className={pathname === "/features" ? "text-blue-500" : ""}
+        >Features</Link>
       </li>
       <li>
-        <Link href="/">Dashboard</Link>
+        <Link 
+        href="/dashboard"
+        className={pathname === "/dashboard" ? "text-blue-500" : ""}
+        >Dashboard</Link>
       </li>
-      <li>
-        <Link href="/">Pricing</Link>
-      </li>
+      {session?.user && <>
+            <li>
+                <Link 
+                href="/profile"
+                className={pathname === "/profile" ? "text-blue-500" : ""}
+                >Profile</Link>
+            </li>
+        </>}
     </>
   );
   const betterauthlinks = (
@@ -93,7 +103,7 @@ export default function Navbar() {
             </svg>
           </button>
           <div className="flex items-center gap-3">
-            <p className="font-bold">ACME</p>
+            <Link href="/" className="font-bold">ACME</Link>
           </div>
         </div>
         <ul className="hidden items-center gap-4 md:flex">{links}</ul>
